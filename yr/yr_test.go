@@ -1,47 +1,31 @@
-package yr
+
+package yr_test
 
 import (
+	"bufio"
+	"fmt"
+	"os"
 	"testing"
 )
 
-func TestCelsiusToFahrenheitString(t *testing.T) {
-     type test struct {
-	input string
-	want string
-     }
-     tests := []test{
-	     {input: "6", want: "42.8"},
-	     {input: "0", want: "32.0"},
-     }
+func TestYr(t *testing.T) {
+	var input string
+scanner := bufio.NewScanner(os.Stdin)
 
-     for _, tc := range tests {
-	     got, _ := CelsiusToFahrenheitString(tc.input)
-	     if !(tc.want == got) {
-		     t.Errorf("expected %s, got: %s", tc.want, got)
-	     }
-     }
+for scanner.Scan() {
+    input = scanner.Text()
+    if input == "q" || input == "exit" {
+        fmt.Println("exit")
+        os.Exit(0)
+    } else if input == "convert" {
+        fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
+        // funksjon som gjør åpner fil, leser linjer, gjør endringer og lagrer nye linjer i en ny fil
+
+    // flere else-if setninger     
+    } else {
+        fmt.Println("Venligst velg convert, average eller exit:")
+
+    }
+
 }
-
-// Forutsetter at vi kjenner strukturen i filen og denne implementasjon 
-// er kun for filer som inneholder linjer hvor det fjerde element
-// på linjen er verdien for temperatrmaaling i grader celsius
-func TestCelsiusToFahrenheitLine(t *testing.T) {
-     type test struct {
-	input string
-	want string
-     }
-     tests := []test{
-	     {input: "Kjevik;SN39040;18.03.2022 01:50;6", want: "Kjevik;SN39040;18.03.2022 01:50;42.8"},
-	     {input: "Kjevik;SN39040;18.03.2022 01:50", want: ""},
-
-     }
-
-     for _, tc := range tests {
-	     got, _ := CelsiusToFahrenheitLine(tc.input)
-	     if !(tc.want == got) {
-		     t.Errorf("expected %s, got: %s", tc.want, got)
-	     }
-     }
-
-	
 }
